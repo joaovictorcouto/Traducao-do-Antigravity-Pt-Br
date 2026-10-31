@@ -52,13 +52,17 @@ Diferente de extensões superficiais de navegador, o sistema opera por meio de u
 
 ## 🖼️ Demonstração Visual
 
-| Painel de Configurações | Linha do Tempo e Ações do Agente |
+| Painel de Configurações (Geral) | Modelos & Uso (Cotas e Limites) |
 | :---: | :---: |
-| <img src="assets/preview-settings.png" alt="Configurações em Português" width="460" onerror="this.src='https://placehold.co/600x400/18181b/ffffff?text=Configura%C3%A7%C3%B5es+pt-BR';"/> | <img src="assets/preview-timeline.png" alt="Timeline do Agente em Português" width="460" onerror="this.src='https://placehold.co/600x400/18181b/ffffff?text=Timeline+pt-BR';"/> |
+| <img src="assets/preview-settings.png" alt="Configurações em Português" width="460" /> | <img src="assets/preview-models.png" alt="Modelos e Uso em Português" width="460" /> |
 
-| Chat e Sugestões | Menus de Contexto e Projetos |
+| Linha do Tempo e Ações do Agente | Interface Principal e Chat |
 | :---: | :---: |
-| <img src="assets/preview-chat.png" alt="Interface de Chat" width="460" onerror="this.src='https://placehold.co/600x400/18181b/ffffff?text=Chat+e+A%C3%A7%C3%B5es';"/> | <img src="assets/preview-context.png" alt="Menus de Contexto" width="460" onerror="this.src='https://placehold.co/600x400/18181b/ffffff?text=Menus+de+Contexto';"/> |
+| <img src="assets/preview-timeline.png" alt="Timeline do Agente em Português" width="460" /> | <img src="assets/preview-chat.png" alt="Interface Principal e Chat" width="460" /> |
+
+| Personalizações e Habilidades (Skills) | Menus de Contexto e Ações Rápidas |
+| :---: | :---: |
+| <img src="assets/preview-skills.png" alt="Habilidades e Plugins em Português" width="460" /> | <img src="assets/preview-context.png" alt="Menus de Contexto em Português" width="460" /> |
 
 ---
 
