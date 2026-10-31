@@ -11,6 +11,8 @@
     "restore": "node core/restore.js",
     "build:launcher": "cargo build --release --manifest-path launcher/Cargo.toml && node -e \"require('fs').copyFileSync('launcher/target/release/Antigravity-ptbr.exe', 'Antigravity-ptbr.exe'); require('fs').copyFileSync('launcher/target/release/Antigravity-ptbr.exe', 'launcher/Antigravity-ptbr.exe'); console.log('Launcher Antigravity-ptbr compilado com sucesso.');\"",
     "create-shortcuts": "node launcher/create-shortcuts.js",
+    "bundle:engine": "node -e \"require('./core/embedded-assets')\" && esbuild core/installer-engine.js --bundle --platform=node --target=node20 --outfile=dist/installer-engine.bundle.js",
+    "build:installer": "npm run bundle:engine && cargo build --release --manifest-path installer/Cargo.toml && node -e \"require('fs').copyFileSync('installer/target/release/Instalador-Antigravity-ptBR.exe', 'Instalador-Antigravity-ptBR.exe'); require('fs').copyFileSync('installer/target/release/Instalador-Antigravity-ptBR.exe', 'installer/Instalador-Antigravity-ptBR.exe'); console.log('Instalador executavel gerado com sucesso.');\"",
     "setup": "npm run patch && npm run build:launcher && npm run create-shortcuts",
     "test": "node test/test-system.js"
   },
@@ -26,5 +28,8 @@
     "launcher"
   ],
   "author": "Antigravity Community",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  }
 }

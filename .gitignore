@@ -1,8 +1,10 @@
 # Dependências
 node_modules/
 
-# Builds e binários intermediários do Rust
+# Builds e binários intermediários do Rust e Bundles
 launcher/target/
+installer/target/
+dist/
 
 # Mock de testes
 test/mock_app/

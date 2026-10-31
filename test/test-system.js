@@ -219,8 +219,23 @@ assert(fs.existsSync(buildRsPath) && fs.readFileSync(buildRsPath, 'utf8').includ
 const cargoTomlPath = path.resolve(__dirname, '..', 'launcher', 'Cargo.toml');
 assert(fs.existsSync(cargoTomlPath) && fs.readFileSync(cargoTomlPath, 'utf8').includes('winres'), 'launcher/Cargo.toml inclui dependência winres');
 
-// 6. Teste de Ciclo Completo (Mock App Asar)
-console.log('\n[6/6] Executando Ciclo Completo de Patch e Rollback em Mock Asar...');
+// 6. Instalador Executável Autônomo (Instalador-Antigravity-ptBR.exe)
+console.log('\n[6/7] Testando Instalador Executável Autônomo para Usuário Final...');
+const installerExe = path.resolve(__dirname, '..', 'Instalador-Antigravity-ptBR.exe');
+assert(fs.existsSync(installerExe), 'Executável Instalador-Antigravity-ptBR.exe existe');
+const installerBuf = fs.readFileSync(installerExe);
+assert(installerBuf[0] === 0x4D && installerBuf[1] === 0x5A, 'Instalador possui cabeçalho PE (MZ) válido');
+assert(installerBuf.length < 2 * 1024 * 1024, `Instalador é ultra compacto (${(installerBuf.length / 1024).toFixed(1)} KB)`);
+
+const bundlePath = path.resolve(__dirname, '..', 'dist', 'installer-engine.bundle.js');
+assert(fs.existsSync(bundlePath), 'Bundle autônomo dist/installer-engine.bundle.js existe');
+const engineJs = path.resolve(__dirname, '..', 'core', 'installer-engine.js');
+assert(fs.existsSync(engineJs), 'Arquivo core/installer-engine.js existe');
+const embeddedJs = path.resolve(__dirname, '..', 'core', 'embedded-assets.js');
+assert(fs.existsSync(embeddedJs), 'Arquivo core/embedded-assets.js existe');
+
+// 7. Teste de Ciclo Completo (Mock App Asar)
+console.log('\n[7/7] Executando Ciclo Completo de Patch e Rollback em Mock Asar...');
 try {
   execSync('node test/test-mock.js', { stdio: 'inherit' });
   assert(true, 'Ciclo de extração, injeção, atomic repack e restauração validado');
