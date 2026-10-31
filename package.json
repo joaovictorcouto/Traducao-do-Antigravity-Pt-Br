@@ -1,0 +1,30 @@
+{
+  "name": "antigravity-ptbr",
+  "productName": "Antigravity Tradução pt-BR",
+  "version": "1.0.0",
+  "description": "Sistema autônomo e transparente de tradução para Português do Brasil do Antigravity",
+  "main": "core/patcher.js",
+  "scripts": {
+    "patch": "node core/patcher.js --force",
+    "patch:check": "node core/patcher.js --check",
+    "patch:force": "node core/patcher.js --force",
+    "restore": "node core/restore.js",
+    "build:launcher": "cargo build --release --manifest-path launcher/Cargo.toml && node -e \"require('fs').copyFileSync('launcher/target/release/Antigravity-ptbr.exe', 'Antigravity-ptbr.exe'); require('fs').copyFileSync('launcher/target/release/Antigravity-ptbr.exe', 'launcher/Antigravity-ptbr.exe'); console.log('Launcher Antigravity-ptbr compilado com sucesso.');\"",
+    "create-shortcuts": "node launcher/create-shortcuts.js",
+    "setup": "npm run patch && npm run build:launcher && npm run create-shortcuts",
+    "test": "node test/test-system.js"
+  },
+  "dependencies": {
+    "@electron/asar": "^4.3.1"
+  },
+  "keywords": [
+    "antigravity",
+    "translation",
+    "pt-br",
+    "electron",
+    "patcher",
+    "launcher"
+  ],
+  "author": "Antigravity Community",
+  "license": "MIT"
+}

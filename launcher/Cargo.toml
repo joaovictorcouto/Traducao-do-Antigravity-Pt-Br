@@ -1,0 +1,20 @@
+[package]
+name = "antigravity_ptbr"
+version = "1.0.0"
+edition = "2021"
+
+[[bin]]
+name = "Antigravity-ptbr"
+path = "src/main.rs"
+
+[dependencies]
+
+[build-dependencies]
+winres = "0.1"
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
