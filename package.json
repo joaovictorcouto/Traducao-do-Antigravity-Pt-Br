@@ -1,6 +1,6 @@
 {
-  "name": "antigravity-ptbr",
-  "productName": "Antigravity Tradução pt-BR",
+  "name": "traducao-do-antigravity-pt-br",
+  "productName": "Tradução do Antigravity Pt-Br",
   "version": "1.0.0",
   "description": "Sistema autônomo e transparente de tradução para Português do Brasil do Antigravity",
   "main": "core/patcher.js",

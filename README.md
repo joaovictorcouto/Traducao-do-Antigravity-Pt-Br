@@ -1,4 +1,4 @@
-# Antigravity Tradução pt-BR 🇧🇷
+# Tradução do Antigravity Pt-Br 🇧🇷
 
 Tradução completa, dinâmica e transparente para **Português do Brasil (pt-BR)** do **Google Antigravity**.
 
@@ -25,8 +25,8 @@ Tradução completa, dinâmica e transparente para **Português do Brasil (pt-BR
 
 1. **Clone o repositório:**
    ```bash
-   git clone https://github.com/joaovictorcouto/antigravity-ptbr.git
-   cd antigravity-ptbr
+   git clone https://github.com/joaovictorcouto/Traducao-do-Antigravity-Pt-Br.git
+   cd Traducao-do-Antigravity-Pt-Br
    ```
 
 2. **Instale as dependências:**
