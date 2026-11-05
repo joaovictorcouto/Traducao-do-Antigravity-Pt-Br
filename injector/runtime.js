@@ -14,9 +14,19 @@
   const dictionary = window.__ANTIGRAVITY_LOCALE_DICT__ || {};
 
   // Case-insensitive dictionary index for resilient lookups
+  // Words that must NEVER be matched case-insensitively to avoid collision with Portuguese prepositions/pronouns
+  const CASE_INSENSITIVE_EXCLUSIONS = new Set([
+    'no', 'on', 'off', 'ran', 'read', 'fill', 'type', 'to', 'in', 'and', 'all',
+    'open', 'file', 'view', 'help', 'add', 'cut', 'pin', 'run', 'stop', 'back',
+    'next', 'save', 'send', 'done', 'yes', 'task', 'tasks', 'chat'
+  ]);
+
   const lowerCaseIndex = new Map();
   for (const key of Object.keys(dictionary)) {
-    lowerCaseIndex.set(key.toLowerCase(), dictionary[key]);
+    const lowerKey = key.toLowerCase();
+    if (!CASE_INSENSITIVE_EXCLUSIONS.has(lowerKey)) {
+      lowerCaseIndex.set(lowerKey, dictionary[key]);
+    }
   }
 
   // Dynamic regex pattern transformers for agent actions, usage quotas, metrics and interpolations
@@ -250,7 +260,17 @@
     '.xterm',
     '.monaco-editor',
     '.cm-editor',
-    '[data-no-translate]'
+    '[data-no-translate]',
+    '[data-markdown-root]',
+    '.prose',
+    '[class*="prose"]',
+    '[class*="markdown"]',
+    '[class*="rendered-markdown"]',
+    '[data-testid*="markdown"]',
+    '[class*="artifact-content"]',
+    '[class*="artifact-body"]',
+    '[class*="artifact-viewer"]',
+    '[contenteditable="true"]'
   ].join(',');
 
   function isExcludedNode(node) {
@@ -285,7 +305,7 @@
     return false;
   }
 
-  function translateString(input) {
+  function translateString(input, element) {
     if (!input || typeof input !== 'string') return input;
     const trimmed = input.trim();
     if (!trimmed) return input;
@@ -306,6 +326,18 @@
     // 2. Technical and code exclusions
     if (shouldExcludeRawText(trimmed)) {
       return input;
+    }
+
+    // Contextual guard for short words that collide with Portuguese prepositions/pronouns
+    // "No" must only translate to "Não" when directly inside a confirmation button or modal action
+    if (trimmed === 'No') {
+      const isButton = element && (
+        (element.matches && element.matches('button, [role="button"]')) ||
+        (element.closest && element.closest('button, [role="button"]'))
+      );
+      if (!isButton) {
+        return input;
+      }
     }
 
     // 3. Exact dictionary lookup
@@ -332,7 +364,7 @@
     const currentText = node.nodeValue;
     if (!currentText || !currentText.trim()) return;
 
-    const newText = translateString(currentText);
+    const newText = translateString(currentText, node.parentElement);
     if (newText !== currentText) {
       node.nodeValue = newText;
     }
@@ -348,7 +380,7 @@
       const attr = TRANSLATABLE_ATTRIBUTES[i];
       const val = element.getAttribute(attr);
       if (val) {
-        const newVal = translateString(val);
+        const newVal = translateString(val, element);
         if (newVal !== val) {
           element.setAttribute(attr, newVal);
         }
@@ -374,6 +406,11 @@
         const raw = child.nodeValue;
         if (!raw || !raw.trim()) continue;
         const trimmed = raw.trim();
+
+        // Prevent colliding short words (like "No") from being translated in mixed phrases
+        if (trimmed === 'No' || trimmed.toLowerCase() === 'no') {
+          continue;
+        }
 
         // Check exact match or known inline fragment
         if (dictionary[trimmed]) {

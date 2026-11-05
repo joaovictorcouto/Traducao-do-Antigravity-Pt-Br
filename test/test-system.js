@@ -149,6 +149,8 @@ assert(runtimeContent.includes('DYNAMIC_PATTERNS'), 'Runtime possui motor de pad
 assert(runtimeContent.includes('TEXT_NODE'), 'Runtime varre nós TEXT_NODE');
 assert(runtimeContent.includes('placeholder') && runtimeContent.includes('aria-label') && runtimeContent.includes('title'), 'Runtime varre placeholder, aria-label e title');
 assert(runtimeContent.includes('isExcludedNode') && runtimeContent.includes('terminal'), 'Runtime contém regras de exclusão estrita para código/terminal');
+assert(runtimeContent.includes('data-markdown-root'), 'Runtime contém exclusão de conteúdo Markdown de usuário e IA');
+assert(runtimeContent.includes('CASE_INSENSITIVE_EXCLUSIONS'), 'Runtime contém exclusões de correspondência insensível a maiúsculas/minúsculas');
 assert(runtimeContent.includes('deepWalkAndTranslate'), 'Runtime possui varredura recursiva profunda deepWalkAndTranslate');
 assert(runtimeContent.includes('resolveMixedInlineChildren'), 'Runtime possui resolvedor de nós mistos com tags inline');
 assert(runtimeContent.includes('isPortalOrOverlay'), 'Runtime possui interceptor de portais e overlays flutuantes');
