@@ -21,6 +21,12 @@
 
   // Dynamic regex pattern transformers for agent actions, usage quotas, metrics and interpolations
   const DYNAMIC_PATTERNS = [
+    // Greetings and initial home prompts
+    {
+      regex: /^Hi\s+(.+?),\s*what can we get done today\??$/i,
+      replace: (_, name) => `Olá ${name}, o que podemos fazer hoje?`
+    },
+
     // Model quota and popover resets
     {
       regex: /^Resets in\s+(\d+)d\s+(\d+)h$/i,

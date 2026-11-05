@@ -116,7 +116,22 @@ const requiredSections = [
   'Weekly limit', '5h limit',
 
   // Ações da Timeline e Status
-  'Ran', 'Analyzed', 'Edited', 'Created', 'Reading', 'Working'
+  'Ran', 'Analyzed', 'Edited', 'Created', 'Reading', 'Working',
+
+  // Atualização Antigravity 2.4 (Interface, Menus, Atalhos e Navegador)
+  'No conversations yet', 'Search Projects', 'Recent', 'This Computer', 'New Project', 'No Project',
+  'Work in a New Worktree', 'Keeps your checkout untouched', 'Add Context', 'Folder', 'Mentions',
+  'Actions', 'Browser', 'Connectors', 'Project deleted',
+  'Previous Side Panel Tab', 'Next Side Panel Tab', 'Toggle Side Panel', 'Toggle Maximize Side Panel',
+  'Download Location', 'Folder where files downloaded in the built-in browser are saved.',
+  'Change...', 'Browsing History',
+  'Clear visited URLs and autocomplete suggestions from the built-in browser.',
+  'Conversation Steps', 'Choose how much detail is shown during a conversation.',
+  'Verbose', 'Chat Width', 'Fill', 'Accessibility', 'Screen Reader Mode',
+  'Optimize the interface and terminal output for screen readers.',
+  'Automatic Check for Updates',
+  'Automatically prompt you to restart the app when a new update is available. When disabled, you can check for updates manually from the app menu.',
+  'Voice mode', 'Microphone', 'Input device for voice mode and dictation.', 'Excluir Project'
 ];
 for (const section of requiredSections) {
   assert(translations[section] !== undefined, `Termo '${section}' mapeado no dicionário`);
@@ -140,6 +155,7 @@ assert(runtimeContent.includes('isPortalOrOverlay'), 'Runtime possui interceptor
 
 // Validar regex patterns da timeline, interpoladores dinâmicos, métricas e popover de uso
 const patternRegexes = [
+  { pattern: /^Hi\s+(.+?),\s*what can we get done today\??$/i },
   { pattern: /^Worked for\s+(.+)$/i },
   { pattern: /^Thought for\s+(.+)$/i },
   { pattern: /^Explored files,\s*ran commands,\s*edited files$/i },
